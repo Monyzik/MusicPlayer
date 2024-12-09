@@ -69,7 +69,7 @@ class Ui_AudioPlayerMainWindow(object):
         self.tracks_listWidget.setObjectName("tracks_listWidget")
         self.verticalLayout.addWidget(self.tracks_listWidget)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setContentsMargins(10, 10, 10, 10)
+        self.horizontalLayout_4.setContentsMargins(10, 10, 10, 0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.current_image_lable = QtWidgets.QLabel(parent=self.centralwidget)
         self.current_image_lable.setEnabled(True)
@@ -94,11 +94,38 @@ class Ui_AudioPlayerMainWindow(object):
         self.current_duration_label.setText("")
         self.current_duration_label.setObjectName("current_duration_label")
         self.horizontalLayout_4.addWidget(self.current_duration_label)
-        self.current_action_lable = QtWidgets.QLabel(parent=self.centralwidget)
-        self.current_action_lable.setText("")
-        self.current_action_lable.setObjectName("current_action_lable")
-        self.horizontalLayout_4.addWidget(self.current_action_lable)
+        self.play_stop_button = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.play_stop_button.setText("")
+        self.play_stop_button.setObjectName("play_stop_button")
+        self.horizontalLayout_4.addWidget(self.play_stop_button)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.track_time_slider = QtWidgets.QSlider(parent=self.centralwidget)
+        self.track_time_slider.setMinimumSize(QtCore.QSize(0, 20))
+        self.track_time_slider.setStyleSheet("            QSlider{\n"
+"            }\n"
+"            QSlider::groove:horizontal {  \n"
+"                height: 10px;\n"
+"                margin: 0px;\n"
+"                border-radius: 5px;\n"
+"                background: #B0AEB1;\n"
+"            }\n"
+"            QSlider::handle:horizontal {\n"
+"                background: #fff;\n"
+"                border: 1px solid #E3DEE2;\n"
+"                width: 17px;\n"
+"                margin: -5px 0; \n"
+"                border-radius: 8px;\n"
+"            }\n"
+"            QSlider::sub-page:qlineargradient {\n"
+"                background: #3B99FC;\n"
+"                border-radius: 5px;\n"
+"            }")
+        self.track_time_slider.setPageStep(0)
+        self.track_time_slider.setTracking(True)
+        self.track_time_slider.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.track_time_slider.setTickPosition(QtWidgets.QSlider.TickPosition.NoTicks)
+        self.track_time_slider.setObjectName("track_time_slider")
+        self.verticalLayout.addWidget(self.track_time_slider)
         self.widget = QtWidgets.QWidget(parent=self.centralwidget)
         self.widget.setObjectName("widget")
         self.verticalLayout.addWidget(self.widget)
@@ -123,6 +150,7 @@ class Ui_AudioPlayerMainWindow(object):
 
         self.retranslateUi(AudioPlayerMainWindow)
         QtCore.QMetaObject.connectSlotsByName(AudioPlayerMainWindow)
+        AudioPlayerMainWindow.setTabOrder(self.tracks_listWidget, self.play_stop_button)
 
     def retranslateUi(self, AudioPlayerMainWindow):
         _translate = QtCore.QCoreApplication.translate

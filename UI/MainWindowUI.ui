@@ -166,7 +166,7 @@
          <number>10</number>
         </property>
         <property name="bottomMargin">
-         <number>10</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="current_image_lable">
@@ -223,13 +223,56 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="current_action_lable">
+         <widget class="QPushButton" name="play_stop_button">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QSlider" name="track_time_slider">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">            QSlider{
+            }
+            QSlider::groove:horizontal {  
+                height: 10px;
+                margin: 0px;
+                border-radius: 5px;
+                background: #B0AEB1;
+            }
+            QSlider::handle:horizontal {
+                background: #fff;
+                border: 1px solid #E3DEE2;
+                width: 17px;
+                margin: -5px 0; 
+                border-radius: 8px;
+            }
+            QSlider::sub-page:qlineargradient {
+                background: #3B99FC;
+                border-radius: 5px;
+            }</string>
+        </property>
+        <property name="pageStep">
+         <number>0</number>
+        </property>
+        <property name="tracking">
+         <bool>true</bool>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QWidget" name="widget" native="true"/>
@@ -265,6 +308,10 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>tracks_listWidget</tabstop>
+  <tabstop>play_stop_button</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

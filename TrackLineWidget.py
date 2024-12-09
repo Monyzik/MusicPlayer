@@ -7,12 +7,12 @@ from UI.TrackLineUI import Ui_TrackLine
 
 
 class TrackLineWidget(QWidget, Ui_TrackLine):
-    def __init__(self, track: Track):
+    def __init__(self, track: Track) -> None:
         super().__init__()
         self.setupUi(self)
-        self.track = track
+        self.track: Track = track
         image = QImage()
-        image.loadFromData(track.image)
+        image.loadFromData(track.image.data)
         image = image.scaled(self.size().height(), self.size().height())
         self.image.setPixmap(QPixmap.fromImage(image))
         self.track_name.setText(track.title)
