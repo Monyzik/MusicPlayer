@@ -1,7 +1,9 @@
 import os
 import sys
+from queue import Queue
 
-from PyQt6.QtCore import QSize, QUrl, QTimer
+from PyQt6.QtCore import QSize, QUrl, QTimer, QModelIndex
+from guidata.dataset.qtitemwidgets import LineEditWidget
 from playhouse.sqlite_udf import duration
 from pygame import mixer
 from PyQt6.QtGui import QImage, QPixmap, QIcon
@@ -29,6 +31,8 @@ class MainWindow(QMainWindow, Ui_AudioPlayerMainWindow):
         self.add_track_action.triggered.connect(self.select_file)
         self.play_stop_button.setFlat(True)
         mixer.init()
+
+        self.tracks_queue: Queue[Track] = Queue()
 
         self.current_track_time = 0
 
@@ -81,6 +85,14 @@ class MainWindow(QMainWindow, Ui_AudioPlayerMainWindow):
         widget: TrackLineWidget = self.tracks_listWidget.itemWidget(item)
         track: Track = widget.track
 
+        index: QModelIndex = self.tracks_listWidget.indexFromItem(item)
+        print(index.row())
+        for i in range(index.row() + 1, self.tracks_listWidget.count()):
+            widget_from_index: LineEditWidget = self.tracks_listWidget.item(i)
+            track_from_index: Track = self.tracks_listWidget.itemWidget(widget_from_index).track
+            self.tracks_queue.put(track_from_index)
+        # print(self.tracks_queue.get())
+
         self.current_track = track
         self.current_state = States.play
         self.update_state()
@@ -120,6 +132,7 @@ class MainWindow(QMainWindow, Ui_AudioPlayerMainWindow):
             self.play_stop_button.setIcon(QIcon(PATH_TO_STOP_IMAGE))
             mixer.music.pause()
         elif self.current_state == States.stop:
+            self.play_stop_button.setIcon(QIcon(PATH_TO_STOP_IMAGE))
             mixer.music.stop()
 
     def update_time(self):
@@ -129,9 +142,13 @@ class MainWindow(QMainWindow, Ui_AudioPlayerMainWindow):
             return
         self.current_track_time += 1
         if self.current_track_time > int(self.current_track.duration):
-            self.current_state = States.stop
-            self.update_state()
-            #TODO add logic
+            if self.tracks_queue.empty():
+                self.current_state = States.stop
+                self.update_state()
+            else:
+                self.current_state = States.play
+                self.current_track = self.tracks_queue.get()
+                self.update_state()
         self.current_duration_label.setText(self.current_track.get_pretty_duration_from_start(self.current_track_time))
 
     def update_slider(self):
