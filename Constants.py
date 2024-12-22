@@ -1,2 +1,8 @@
 PATH_TO_PLAY_IMAGE = "UI/icons/play.svg"
 PATH_TO_STOP_IMAGE = "UI/icons/stop.svg"
+PATH_TO_UP_IMAGE = "UI/icons/up.svg"
+PATH_TO_NEXT_IMAGE = "UI/icons/next.svg"
+PATH_TO_PREV_IMAGE = "UI/icons/prev.svg"
+PATH_TO_VOLUME_IMAGE = "UI/icons/volume.svg"
+PATH_TO_REPEATING_PRESSED_IMAGE = "UI/icons/repeating_pressed.svg"
+PATH_TO_REPEATING_UNPRESSED_IMAGE = "UI/icons/repeating_unpressed.svg"

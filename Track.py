@@ -5,6 +5,10 @@ from PyQt6.QtGui import QColor
 from tinytag import TinyTag, Image
 
 
+def get_pretty_time(time) -> str:
+    return f'{int(time / 60)}:{int(time % 60):02}'
+
+
 class Track:
     def __init__(self, path: str) -> None:
         tag = TinyTag.get(path, image=True)
@@ -21,5 +25,7 @@ class Track:
         return f"{int(self.duration / 60)}:{int(self.duration % 60) + 1:02}"
 
     def get_pretty_duration_from_start(self, time) -> str:
-        return f'{int(time / 60)}:{int(time % 60):02}/{self.get_pretty_duration()}'
+        return f'{get_pretty_time(time)}/{self.get_pretty_duration()}'
+
+
 

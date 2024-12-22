@@ -27,11 +27,14 @@
     <layout class="QHBoxLayout" name="MainLine">
      <item>
       <widget class="QLabel" name="image">
+       <property name="frameShape">
+        <enum>QFrame::Panel</enum>
+       </property>
        <property name="lineWidth">
         <number>1</number>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -39,15 +42,27 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="track_name">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="author">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -68,8 +83,13 @@
      </item>
      <item>
       <widget class="QLabel" name="duration">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+        </font>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
